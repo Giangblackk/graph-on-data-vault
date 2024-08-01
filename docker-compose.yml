@@ -1,0 +1,19 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changethispassword
+      PGDATA: /data/postgres
+    volumes:
+       - ./postgres:/data/postgres
+    ports:
+      - 5432:5432
+  puppygraph:
+    container_name: puppygraph
+    image: puppygraph/puppygraph:stable
+    ports:
+      - 8081:8081
+      - 8182:8182
+      - 7687:7687

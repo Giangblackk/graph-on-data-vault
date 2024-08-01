@@ -1,0 +1,118 @@
+{
+  "catalogs": [
+    {
+      "name": "public",
+      "type": "postgresql",
+      "jdbc": {
+        "username": "postgres",
+        "password": "changethispassword",
+        "jdbcUri": "jdbc:postgresql://postgres:5432/postgres",
+        "driverClass": "org.postgresql.Driver"
+      }
+    }
+  ],
+  "vertices": [
+    {
+      "label": "aircraft",
+      "attributes": [
+        {
+          "type": "String",
+          "name": "adshex"
+        }
+      ],
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "aircraft",
+        "metaFields": {
+          "id": "sk"
+        }
+      }
+    },
+    {
+      "label": "airport",
+      "attributes": [
+        {
+          "type": "String",
+          "name": "iata_code"
+        },
+        {
+          "type": "String",
+          "name": "name"
+        }
+      ],
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "airport",
+        "metaFields": {
+          "id": "sk"
+        }
+      }
+    },
+    {
+      "label": "flight",
+      "attributes": [
+        {
+          "type": "String",
+          "name": "flightnum"
+        }
+      ],
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "flight",
+        "metaFields": {
+          "id": "sk"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "label": "flight_aircraft",
+      "from": "aircraft",
+      "to": "flight",
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "flight_aircraft",
+        "metaFields": {
+          "from": "aircraft_sk",
+          "id": "sk",
+          "to": "flight_sk"
+        }
+      }
+    },
+    {
+      "label": "flight_to",
+      "from": "flight",
+      "to": "airport",
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "flight_to",
+        "metaFields": {
+          "from": "flight_sk",
+          "id": "sk",
+          "to": "airport_sk"
+        }
+      }
+    },
+    {
+      "label": "flight_from",
+      "from": "flight",
+      "to": "airport",
+      "mappedTableSource": {
+        "catalog": "public",
+        "schema": "public",
+        "table": "flight_from",
+        "metaFields": {
+          "from": "flight_sk",
+          "id": "sk",
+          "to": "airport_sk"
+        }
+      }
+    }
+  ]
+}
